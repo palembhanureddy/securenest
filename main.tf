@@ -93,8 +93,8 @@ resource "aws_iam_role" "test_role" {
 EOF
 }
 
-resource "aws_iam_instance_profile" "test_profile" {
-  name = "test_profile"
+resource "aws_iam_instance_profile" "test_profile3" {
+  name = "test_profile3"
   role = "${aws_iam_role.test_role.name}"
 }
 
@@ -117,10 +117,10 @@ EOF
 }
 
 resource "aws_instance" "web" {
-  ami             = "ami-04c913012f8977029"
+  ami             = "ami-0e326862c8e74c0fe"
   instance_type   = "t2.medium" 
   key_name        = var.key_name
-  iam_instance_profile = "${aws_iam_instance_profile.test_profile.name}"
+  iam_instance_profile = "${aws_iam_instance_profile.test_profile3.name}"
   security_groups = [aws_security_group.jenkins_sg.name]
   user_data       = "${file("install_jenkins.sh")}"
   tags = {
